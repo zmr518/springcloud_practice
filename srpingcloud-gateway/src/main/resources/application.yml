@@ -1,0 +1,19 @@
+server:
+  port: 8084
+spring:
+  application:
+    name: GATEWAY
+  cloud:
+    nacos:
+      discovery:
+        server-addr=192.168.3.6:8848
+    gateway:
+      routes:
+        - id: user_router
+          uri: http://localhost:8081
+          predicates:
+            - Path=/user/**
+        - id: order_router
+          uri: http://localhost:8083
+          predicates:
+            - Path=/order/**
